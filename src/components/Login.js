@@ -7,13 +7,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constant";
 
 const Login = () => {
 
-  const navigate = useNavigate();
   const dispatch=useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -23,10 +22,7 @@ const Login = () => {
   const password = useRef(null);
 
   const handleButtonClick = () => {
-    //Validate the form data
-
     const message = checkValidData(
-      // name.current.value,
       email.current.value,
       password.current.value
     );
@@ -46,8 +42,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455_640.jpg",
+            photoURL:USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
@@ -60,15 +55,12 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-      
-              navigate("/browse");
+             
             })
             .catch((error) => {
               // An error occurred
               setErrorMessage(error.message);
             });
-
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -85,10 +77,8 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-
-          navigate("/browse");
-          // ...
+          const user = userCredential.user;  
+          
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -101,12 +91,14 @@ const Login = () => {
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
+  
   return (
     <div>
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/7c0e18aa-2c95-474d-802e-7f30e75dcca4/web/AE-en-20241014-TRIFECTA-perspective_2e053f61-f418-42cd-a121-785611989da2_large.jpg"
+          src="https://assets.nflxext.com/ffe/siteui/vlv3/81d64f3c-9627-4741-8f74-422bf35f9f1d/web/IN-en-20241104-TRIFECTA-perspective_55263ea2-af7f-40ed-9cf0-7029a9b9baf4_large.jpg"
           alt="logo"
         />
       </div>
