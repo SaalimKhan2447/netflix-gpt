@@ -8,7 +8,7 @@ const VideoTitle = ({ title, overview }) => {
           Play
         </button>
         <button className="m-2 bg-gray-500 text-white text-lg py-2 px-12 rounded-lg bg-opacity-50">
-          MoreInfo
+          <i class="fa-light fa-play"></i>MoreInfo
         </button>
       </div>
     </div>
